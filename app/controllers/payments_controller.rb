@@ -25,7 +25,7 @@ class PaymentsController < ApplicationController
 
 
     # In the below section : How the payments controller would have looked if Razorpay is used. Due to limitations of 
-    # integrating with frontend, dummy payment is used so that the logic of subscriptions and throttling can be demonstrated.
+    # integrating with frontend, dummy payment is used (above code) so that the logic of subscriptions and throttling can be demonstrated.
 
     # require 'json'
 
