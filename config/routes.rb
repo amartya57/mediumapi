@@ -104,4 +104,8 @@ Rails.application.routes.draw do
 
   post "/pay", to:"payments#pay"
 
+  # post 'create_payment', to: 'payments#create_payment'
+  # post 'payment_callback', to: 'payments#handle_payment_callback'
+
+
 end
