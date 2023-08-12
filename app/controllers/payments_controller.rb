@@ -1,3 +1,6 @@
+require 'json'
+require 'razorpay'
+
 class PaymentsController < ApplicationController
     def pay
         unless current_user
@@ -27,7 +30,6 @@ class PaymentsController < ApplicationController
     # In the below section : How the payments controller would have looked if Razorpay is used. Due to limitations of 
     # integrating with frontend, dummy payment is used (above code) so that the logic of subscriptions and throttling can be demonstrated.
 
-    # require 'json'
 
     # def generate_unique_order_id
     #     timestamp = Time.now.to_i.to_s 
@@ -54,7 +56,7 @@ class PaymentsController < ApplicationController
 
     #     order_id = generate_unique_order_id
 
-    #     payment_order = Razorpay::PaymentOrder.create(
+    #     payment_order = Razorpay::Order.create(
     #         amount: amount,
     #         currency: currency,
     #         receipt: order_id
