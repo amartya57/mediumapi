@@ -263,10 +263,6 @@ class ArticlesController < ApplicationController
     end
 
     def sort
-        # ordr = params.fetch(:order, :asc)
-    
-        # # Perform the sorting based on 'created_at' in ascending or descending order
-        # articles = Article.order(created_at: ordr)
 
         articles = Article.all
 
@@ -358,6 +354,10 @@ class ArticlesController < ApplicationController
     end 
 
     def update
+        unless current_user
+          render json: {message: "Sign up or log in"}, status: :unauthorized
+          return
+        end
 
         update_params=edit_params
         article = Article.find_by(id: update_params[:id])
@@ -401,6 +401,11 @@ class ArticlesController < ApplicationController
 
 
     def delete
+        unless current_user
+          render json: {message: "Sign up or log in"}, status: :unauthorized
+          return
+        end
+
         article = Article.find_by(id: params[:id])
 
         unless article
@@ -438,6 +443,11 @@ class ArticlesController < ApplicationController
     end
 
     def like
+      unless current_user
+        render json: {message: "Sign up or log in"}, status: :unauthorized
+        return
+      end
+
       id = params.fetch(:id, "")
       article=Article.find(id)
       unless article
@@ -473,6 +483,11 @@ class ArticlesController < ApplicationController
     end
 
     def comment
+      unless current_user
+        render json: {message: "Sign up or log in"}, status: :unauthorized
+        return
+      end
+      
       id = params.fetch(:id, "")
       ctxt=params.fetch(:comment, "")
       article=Article.find(id)

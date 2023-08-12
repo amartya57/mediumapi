@@ -112,7 +112,7 @@ class DraftsController < ApplicationController
         else
             render json: { error: draft.errors.full_messages.join(', ') }, status: :unprocessable_entity
         end
-   end
+    end
 
     def store_current_state(draft)
         current_state = {
@@ -126,6 +126,11 @@ class DraftsController < ApplicationController
     end
 
     def draft_update
+        unless current_user
+            render json: {message: "Sign up or log in"}, status: :unauthorized
+            return
+        end
+
         update_params=edit_params
 
         drafts = Draft.joins(:author).where(authors: { username: current_user.username })
@@ -163,6 +168,7 @@ class DraftsController < ApplicationController
             render json: {message: "Sign up or log in"}, status: :unauthorized
             return
         end
+        
         id = params.fetch(:id, "")
         if id!=""
             drafts = Draft.joins(:author).where(authors: { username: current_user.username })
