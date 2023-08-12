@@ -17,6 +17,7 @@ class PaymentsController < ApplicationController
         if amount>current_class
             user_status.views=amount
         end
+        user_status.subscription_date=Date.today
         user_status.save
         render json: {message: "your allowed view counts have been upgraded"}, status: :ok
     end

@@ -94,6 +94,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_070643) do
     t.string "username"
     t.integer "requests", default: 0
     t.integer "views", default: 1
+    t.date "subscription_date", default: "2023-08-12"
     t.date "last_request_date", default: "2023-08-12"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

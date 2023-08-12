@@ -59,6 +59,12 @@ class ArticlesController < ApplicationController
       unless user_status
         user_status=Status.new(username: current_user.username)
       end
+
+      if (Date.today - user_status.subscription_date).to_i > 28
+        user_status.subscription_date=Date.today
+        user_status.views=0
+      end
+
       current_class=user_status.views
       
       if Date.today>user_status.last_request_date
@@ -344,8 +350,7 @@ class ArticlesController < ApplicationController
       current_state = {
         'title' => article.title,
         'text' => article.text,
-        'topic' => article.topic.name,
-        'updated_at' => Time.now
+        'topic' => article.topic.name
       }
     
       # Add the current state to the 'states' array
