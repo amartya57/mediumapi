@@ -8,6 +8,7 @@ class ListsController < ApplicationController
         response = lists.map do |list|
             {
               id: list.id,
+              name: list.name,
               articles_included: list.article_ids,
               shared_with: list.shared_with,
             }
@@ -20,9 +21,17 @@ class ListsController < ApplicationController
             render json: {message: "Sign up or log in"}, status: :unauthorized
             return
         end
+        
+        name=params.fetch("name")
+        
+        if name == ""
+            render json: {error: "Give a name for the list"}, status: :created
+            return
+        end
+
         un=current_user.username
         author=Author.find_by(username: un)
-        list=List.new(author: author)
+        list=List.new(author: author, name: name)
         if list.save
             render json: {message: "List created successfully, add articles and share"}, status: :created
         else
@@ -62,6 +71,7 @@ class ListsController < ApplicationController
         response =
             {
               id: list.id,
+              name: list.name,
               articles_included: list.article_ids,
               shared_with: list.shared_with,
             }
@@ -101,6 +111,7 @@ class ListsController < ApplicationController
         response =
             {
               id: list.id,
+              name: list.name,
               articles_included: list.article_ids,
               shared_with: list.shared_with,
             }
@@ -143,6 +154,7 @@ class ListsController < ApplicationController
         response =
             {
               id: list.id,
+              name: list.name,
               articles_included: list.article_ids,
               shared_with: list.shared_with,
             }
@@ -185,6 +197,7 @@ class ListsController < ApplicationController
         response =
             {
               id: list.id,
+              name: list.name,
               articles_included: list.article_ids,
               shared_with: list.shared_with,
             }

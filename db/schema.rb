@@ -83,6 +83,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_070643) do
 
   create_table "lists", force: :cascade do |t|
     t.integer "author_id"
+    t.string "name"
     t.json "article_ids", default: []
     t.json "shared_with", default: []
     t.datetime "created_at", null: false
