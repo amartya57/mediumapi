@@ -150,8 +150,12 @@ class AuthorsController < ApplicationController
                 unless this_author.following_ids.include?(un)
                     this_author.following_ids << un
                     this_author.save
+                    render json: {message: "Author followed successfully"}, status: :ok
+                else
+                    this_author.following_ids = this_author.following_ids - [un]
+                    this_author.save
+                    render json: {message: "Author unfollowed successfully"}, status: :ok
                 end
-                render json: {message: "Author followed successfully"}, status: :ok
             else
                 render json: {error: "Can not follow yourself"}, status: :unauthorized
             end
