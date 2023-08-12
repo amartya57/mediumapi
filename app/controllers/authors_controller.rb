@@ -77,25 +77,9 @@ class AuthorsController < ApplicationController
         end
         un=current_user.username
         author = Author.find_by(username: un)
-        new_name=params.fetch(:name, "")
-        new_interest=params.fetch(:interest, "")
-        new_speciality=params.fetch(:speciality, "")
-        if new_name!=""
-            author.name=new_name
-        end
-        
-        if new_interest!=""
-            author.interest=new_interest
-        end
-        
-        if new_speciality!=""
-            author.speciality=new_speciality
-        end
-        
-
-        author.save
-
-        response =
+        update_params=edit_params
+        if author.update(update_params)
+            response =
             {
             id: author.id,
             name: author.name,
@@ -109,7 +93,10 @@ class AuthorsController < ApplicationController
             created_at: author.created_at,
             updated_at: author.updated_at,
             }
-        render json: response
+            render json: response
+        else
+            render json: { error: 'Failed to update the profile' }, status: :unprocessable_entity
+        end
     end
 
     def my_posts
@@ -207,6 +194,16 @@ class AuthorsController < ApplicationController
                 "articles"=>articles
             }
         render json: response
+    end
+
+
+    private
+
+    def edit_params
+        allowed_params = params.permit(:name, :interest, :speciality)
+        # Filter out any keys with nil values
+        allowed_params.reject { |key, value| value.nil? }
+        allowed_params
     end
 
 end
