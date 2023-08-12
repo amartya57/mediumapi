@@ -104,7 +104,7 @@ Rails.application.routes.draw do
 
   post "/pay", to:"payments#pay"                         # pay for subscription
 
-  post '/pay/create_payment', to: 'payments#create_payment'
+  # post '/pay/create_payment', to: 'payments#create_payment'
   # post '/pay/payment_callback', to: 'payments#handle_payment_callback'
 
 
