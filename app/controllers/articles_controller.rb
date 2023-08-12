@@ -49,6 +49,10 @@ class ArticlesController < ApplicationController
       render json: response
     end
 
+
+
+    
+
     def details
       unless current_user
         render json: {message: "Sign up or log in"}, status: :unauthorized
@@ -117,6 +121,10 @@ class ArticlesController < ApplicationController
       end
     end
 
+
+
+
+
     def history
       unless current_user
         render json: {message: "Sign up or log in"}, status: :unauthorized
@@ -143,6 +151,10 @@ class ArticlesController < ApplicationController
 
       render json: { history: article.states }, status: :ok
     end
+
+
+
+
 
     def filter
       author_name = params.fetch(:author, "")
@@ -214,6 +226,9 @@ class ArticlesController < ApplicationController
       render json: response
     end
 
+
+
+
     def search
       text_search_term = article_search_params[:text]
       author_search_term = article_search_params[:author]
@@ -260,6 +275,10 @@ class ArticlesController < ApplicationController
       render json: response
     end
 
+
+
+
+
     def sort
       articles = Article.all
 
@@ -288,6 +307,10 @@ class ArticlesController < ApplicationController
   
       render json: response
     end
+
+
+
+
 
     def create
       unless current_user
@@ -338,6 +361,10 @@ class ArticlesController < ApplicationController
           render json: { error: article.errors.full_messages.join(', ') }, status: :unprocessable_entity
       end
     end
+
+
+
+
 
     def store_current_state(article)
       current_state = {
@@ -394,7 +421,10 @@ class ArticlesController < ApplicationController
       else
           render json: { error: 'Failed to update the article' }, status: :unprocessable_entity
       end
-    end   
+    end 
+    
+    
+
 
 
     def delete
@@ -439,6 +469,10 @@ class ArticlesController < ApplicationController
       end
     end
 
+
+
+
+
     def like
       unless current_user
         render json: {message: "Sign up or log in"}, status: :unauthorized
@@ -478,6 +512,10 @@ class ArticlesController < ApplicationController
 
       render json: response
     end
+
+
+
+
 
     def comment
       unless current_user
@@ -521,6 +559,10 @@ class ArticlesController < ApplicationController
       render json: response
     end
 
+
+
+
+
     def comment_view
       id = params.fetch(:id, "")
       article=Article.find(id)
@@ -538,6 +580,10 @@ class ArticlesController < ApplicationController
 
       render json: response
     end
+
+
+
+
 
     def top_posts
       lim = params.fetch(:num, 10).to_i 
@@ -565,6 +611,10 @@ class ArticlesController < ApplicationController
     
       render json: response
     end
+
+
+
+
 
     def recommended_articles
       
@@ -645,6 +695,10 @@ class ArticlesController < ApplicationController
 
     end
 
+
+
+
+
     def similar_authors
       un=params.fetch(:username, "")
       if un!=""
@@ -671,6 +725,10 @@ class ArticlesController < ApplicationController
       end
     end
 
+
+
+
+
     def view_topics
       topics=Topic.all
       response = topics.map do |topic|
@@ -682,6 +740,9 @@ class ArticlesController < ApplicationController
       end
       render json: topics
     end
+
+
+
 
     def save
       id=params.fetch(:id, "")
