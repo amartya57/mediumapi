@@ -638,6 +638,7 @@ class ArticlesController < ApplicationController
         end
       
         render json: response
+        return
       end
 
       username=current_user.username
