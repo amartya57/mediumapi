@@ -178,7 +178,7 @@ class AuthorsController < ApplicationController
         ctr=0
         while ctr<l
             id=saved_ids[ctr]
-            curr_article=Article.find(id)
+            curr_article=Article.find_by(id: id)
             if curr_article
                 temp=
                 {
@@ -208,7 +208,29 @@ class AuthorsController < ApplicationController
 
         un=current_user.username
         shared_lists=Author.find_by(username: un).shared_lists
-        render json: {"shared lists"=> shared_lists}, status: :ok
+
+        l=shared_lists.length()
+        lists=[]
+        ctr=0
+        while ctr<l
+            id=shared_lists[ctr]
+            list=List.find_by(id: id)
+            if list
+                temp=
+                {
+                    id: list.id,
+                    name: list.name,
+                    articles_included: list.article_ids,
+                }
+                lists << temp
+            end
+            ctr+=1
+        end
+        response =
+            {
+                "shared lists"=>lists
+            }
+        render json: response
     end
 
 
