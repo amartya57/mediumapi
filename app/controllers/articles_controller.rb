@@ -683,6 +683,8 @@ class ArticlesController < ApplicationController
                   views: curr_article.views,
                   comments: curr_article.comments,
                   reading_time_minute: ((curr_article.text.length / 5.0).ceil/200.0).ceil,
+                  created_at: article.created_at,
+                  updated_at: article.updated_at
               }
               articles << temp
           end
