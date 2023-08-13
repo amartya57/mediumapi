@@ -124,6 +124,8 @@ class AuthorsController < ApplicationController
                     likes: curr_article.likes.length(),
                     views: curr_article.views,
                     comments: curr_article.comments.length(),
+                    created_at: curr_article.created_at,
+                    updated_at: curr_article.updated_at,
                 }
                 articles << temp
             end
@@ -185,9 +187,13 @@ class AuthorsController < ApplicationController
                     id: curr_article.id,
                     title: curr_article.title,
                     topic: curr_article.topic,
+                    text: curr_article.text,
+                    image_url: curr_article.image.attached? ? url_for(curr_article.image) : nil,
                     likes: curr_article.likes.length(),
                     views: curr_article.views,
                     comments: curr_article.comments.length(),
+                    created_at: curr_article.created_at,
+                    updated_at: curr_article.updated_at,
                 }
                 articles << temp
             end
