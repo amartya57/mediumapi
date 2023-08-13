@@ -682,6 +682,7 @@ class ArticlesController < ApplicationController
                   likes: curr_article.likes,
                   views: curr_article.views,
                   comments: curr_article.comments,
+                  image_url: curr_article.image.attached? ? url_for(curr_article.image) : nil,
                   reading_time_minute: ((curr_article.text.length / 5.0).ceil/200.0).ceil,
                   created_at: curr_article.created_at,
                   updated_at: curr_article.updated_at
