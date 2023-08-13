@@ -208,7 +208,7 @@ class AuthorsController < ApplicationController
 
         un=current_user.username
         sahared_lists=Author.find_by(username: un).shared_lists
-        render json {"shared lists"=> shared_lists}, status: :ok
+        render json: {"shared lists"=> shared_lists}, status: :ok
     end
 
 
