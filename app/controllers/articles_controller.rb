@@ -679,6 +679,7 @@ class ArticlesController < ApplicationController
                   id: curr_article.id,
                   title: curr_article.title,
                   topic: curr_article.topic.name,
+                  text: curr_article.text,
                   likes: curr_article.likes,
                   views: curr_article.views,
                   comments: curr_article.comments,
