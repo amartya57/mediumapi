@@ -200,6 +200,17 @@ class AuthorsController < ApplicationController
         render json: response
     end
 
+    def view_shared
+        unless current_user
+            render json: {error: "Sign up or log in"}, status: :unauthorized
+            return
+        end
+
+        un=current_user.username
+        sahared_lists=Author.find_by(username: un).shared_lists
+        render json {"shared lists"=> shared_lists}, status: :ok
+    end
+
 
     private
 

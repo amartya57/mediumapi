@@ -66,6 +66,8 @@ Rails.application.routes.draw do
 
   get "/view_saved", to:"authors#view_saved"             # view saved posts
 
+  get "/view_shared", to:"authors#view_shared"           # view shared lists
+
 
   #draft routes
 
