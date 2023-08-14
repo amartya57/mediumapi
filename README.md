@@ -22,3 +22,7 @@ Additions made since last submission :
 4. Implemented unfollow
 5. Implemented logic to expire subscription after 28 days, similar to real world.
 6. Created Razorpay skeleton of creating payment order and handling payment callback which can be activated once frontend is ready. The order object is being created with the order ID and amount. Using this, payment will be done from the frontend. After that we have the handle_payment_callback, which will handle the logics for if payment is successful or failed.
+
+A note on speciality and interests : 
+
+Currently, speciality and interests can be set by users themselves. Later on, we can use AI and ML to give suggestions to users for speciality and interests based on the topic of articles they view or the type of articles they write. It would be a clustering problem in ML.
